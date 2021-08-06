@@ -17,16 +17,38 @@ public class CozinhaMain {
 
         CozinhaCRUD cozinhaCRUD = applicationContext.getBean(CozinhaCRUD.class);
 
+        // ADD
         Cozinha cozinha1 = new Cozinha();
+        
         cozinha1.setNome("Brasileira");
+        cozinhaCRUD.salvar(cozinha1);
 
-        cozinhaCRUD.adicionar(cozinha1);
-
+        // FIND ALL
         List<Cozinha> cozinhas = cozinhaCRUD.listar();
-
         for(Cozinha cozinha : cozinhas){
             System.out.println(cozinha.getNome());
         }
 
-    }
+        // FIND BY ID
+        System.out.println(cozinhaCRUD.buscarPorId(1L).getNome());
+    
+        // UPDATE
+        Cozinha cozinhaNova = new Cozinha();
+
+        cozinhaNova.setId(1L);
+        cozinhaNova.setNome("Inglesa");
+        cozinhaCRUD.salvar(cozinhaNova);
+
+        System.out.println(cozinhaCRUD.buscarPorId(1L).getNome());
+
+        // DELETE
+        cozinhaCRUD.remover(cozinhaNova);
+
+        // FIND ALL STREAM API
+        List<Cozinha> cozinhasAtualizadas = cozinhaCRUD.listar();
+        cozinhasAtualizadas.stream()
+            .forEach(cozinha -> System.out.println(cozinha.getNome()));
+
+        }
+        
 }

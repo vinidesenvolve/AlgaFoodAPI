@@ -17,7 +17,7 @@ public class CozinhaCRUD {
     public EntityManager em;
 
     @Transactional
-    public Cozinha adicionar(Cozinha cozinha) {
+    public Cozinha salvar(Cozinha cozinha) {
         return em.merge(cozinha);
     }
 
@@ -25,4 +25,13 @@ public class CozinhaCRUD {
         return em.createQuery("from Cozinha", Cozinha.class).getResultList();
     }
 
+    public Cozinha buscarPorId(Long id) {
+        return em.find(Cozinha.class, id);
+    }
+
+    @Transactional
+    public void remover(Cozinha cozinha) {
+        cozinha = buscarPorId(cozinha.getId());
+        em.remove(cozinha);
+    }
 }
