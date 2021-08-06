@@ -17,10 +17,16 @@ public class CozinhaMain {
 
         CozinhaCRUD cozinhaCRUD = applicationContext.getBean(CozinhaCRUD.class);
 
+        Cozinha cozinha1 = new Cozinha();
+        cozinha1.setNome("Brasileira");
+
+        cozinhaCRUD.adicionar(cozinha1);
+
         List<Cozinha> cozinhas = cozinhaCRUD.listar();
 
         for(Cozinha cozinha : cozinhas){
             System.out.println(cozinha.getNome());
         }
+
     }
 }
